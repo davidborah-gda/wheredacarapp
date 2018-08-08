@@ -14,7 +14,7 @@ const locationSchema = new Schema({
         max: 180
       },
       user: {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true
       }
   });
