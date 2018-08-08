@@ -3,7 +3,10 @@ const Schema = mongoose.Schema; //is the schema class
 const userSchema = new Schema({
     email: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        unique: true,
+        maxLength: 64
       },
     salt: {
       type: String,
