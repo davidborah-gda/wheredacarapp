@@ -7,6 +7,9 @@ import Park from './pages/Park';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Logo from './components/Logo';
+import Map from './components/Map';
+import MapContainer from './components/MapContainer';
 
 class App extends Component {
   render() {
@@ -17,6 +20,9 @@ class App extends Component {
         <Signup />
         <Login />
         <Home />
+        <Logo />
+        <Map />
+        <MapContainer />
       </div>
     );
   }
