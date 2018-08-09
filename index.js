@@ -32,8 +32,8 @@ const User = require('./models/user');
 const Location = require('./models/location');
 
 //routers
-server.use(userRouter);
-server.use(locationRouter);
+server.use('/api/', userRouter);
+server.use('/api', locationRouter);
 
 //404 handler
 server.use(notFoundHandler);
