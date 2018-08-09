@@ -4,3 +4,9 @@
     justify-content: center;
     align-items: center;
 }
+
+.Signup-Btn {
+    background-color: lightgreen;
+    border-radius: 1rem;
+    color: black;
+}

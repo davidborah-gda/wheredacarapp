@@ -4,3 +4,9 @@
     justify-content: center;
     align-items: center;
 }
+
+.Login-Btn {
+    background-color: lightblue;
+    border-radius: 1rem;
+    color: black;
+}

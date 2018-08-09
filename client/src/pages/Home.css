@@ -4,3 +4,21 @@
     justify-content: center;
     align-items: center;
 }
+
+.Find-Btn {
+    background-color: green;
+    border-radius: 1rem;
+    color: black;
+}
+
+.Park-Btn {
+    background-color: yellow;
+    border-radius: 1rem;
+    color: black;
+}
+
+.UnPark-Btn {
+    background-color: red;
+    border-radius: 1rem;
+    color: black;
+}
