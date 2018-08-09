@@ -4,7 +4,7 @@ import './Find.css';
 class Find extends Component {
     render() {
         return(
-            <div>
+            <div className="Find-Page-Main-Container">
                 Finding the Stuff
                 <button className="UnPark-Btn">UnPark</button>
             </div>

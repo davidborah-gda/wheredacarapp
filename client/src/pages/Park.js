@@ -4,7 +4,7 @@ import './Park.css';
 class Park extends Component {
     render() {
         return(
-            <div>
+            <div className="Park-Page-Main-Container">
                Yayyy!! You've Parked!!!
             </div>
         );
