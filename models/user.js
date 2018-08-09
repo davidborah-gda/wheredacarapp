@@ -10,11 +10,11 @@ const userSchema = new Schema({
       },
     salt: {
       type: String,
-      require: true
+      // require: true  //TODO: remove - commented out for testing initially
     },
     hash: {
       type: String,
-      trim: true
+     // required: true  //TODO: remove - commented out for testing initially
     }
   });
 
