@@ -20,11 +20,8 @@ router.post('/signup', async (req, res, next) => {
 });
 
 // Login:POST (login)
-router.post('/login', async (req, res, next) => {
-    const { email, hash, salt } = req.body;
+router.post('/login', async (req, res, next) => { 
     try {
-        const user = new User({ email, hash, salt });
-        await user.save();
         res.status(201).json({
             msg: "Logged In User",
         }); 
@@ -35,10 +32,7 @@ router.post('/login', async (req, res, next) => {
 
 // Logout:GET (logout)
 router.get('/logout', async (req, res, next) => {
-    const { email, hash, salt } = req.body;
     try {
-        const user = new User({ email, hash, salt });
-        await user.save();
         res.status(201).json({
             msg: "Logged Out User",
         }); 
@@ -48,11 +42,10 @@ router.get('/logout', async (req, res, next) => {
 });
 
 //Deleted User: DELETE by id
-router.delete('/users/:id:email', async (req, res, next) => {
-    const { id, } = req.params;
-    const { email } = req.body;
+router.delete('/users/:id', async (req, res, next) => {
+    const { id } = req.params;
     try {
-        await User.findByIdAndRemove(id, { email });
+        await User.findByIdAndRemove(id);
         res.status(200).json({
             msg: "yayyy destruction user deleted"
         });

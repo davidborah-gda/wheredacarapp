@@ -6,44 +6,42 @@ const Location = require('../models/location');
 
 // Location:POST (create new location)
 router.post('/locations', async (req, res, next) => {
-    const { lat, lon } = req.body;
+    const { lat, lon, user } = req.body;
     try {
-        const location = new Location({ lat, lon });
+        const location = new Location({ lat, lon, user });
         await location.save();
         res.status(201).json({
             msg: "Saved New Location",
             location
         }); 
     } catch (error) {
-        next(err);
+        next(error);
     }
 });
 
 // Locaiton:GET (by ID)
-router.get('/locations:id', async (req, res, next) => {
-    const { lat, lon } = req.body;
+router.get('/locations/:id', async (req, res, next) => {
+    
     try {
-        const location = new Location({ lat, lon });
-        await location.save();
         res.status(201).json({
             msg: "Here be that location",
-            location
+        
         }); 
     } catch (error) {
-        next(err);
+        next(error);
     }
 });
 
 //Delete Location: DELETE (by ID)
 router.delete('/locations/:id', async (req, res, next) => {
-    const { id, } = req.params;
+    
     try {
-        await Location.findByIdAndRemove(id);
+       
         res.status(200).json({
             msg: "yayyy destruction location deleted"
         });
-    }   catch (err) {
-        next(err);
+    }   catch (error) {
+        next(error);
     }
 });
 
