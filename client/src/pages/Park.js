@@ -5,7 +5,8 @@ class Park extends Component {
     render() {
         return(
             <div className="Park-Page-Main-Container">
-               Yayyy!! You've Parked!!!
+               <h1>Yayyy!!</h1>
+               <h3>You've Parked!!!</h3>
             </div>
         );
     }
