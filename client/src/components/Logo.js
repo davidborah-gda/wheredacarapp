@@ -5,7 +5,7 @@ class Logo extends Component {
     render() {
         return(
             <div className="Logo-Container">
-                Logo
+                <img src="http://via.placeholder.com/350x100" className="Logo" />
             </div>
         );
     }
