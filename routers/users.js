@@ -9,6 +9,14 @@ router.post('/signup', async (req, res, next) => {
     const { email, password } = req.body;
     if(!email || !password) 
     next({ msg: "You have not submitted an email and a password", status: 400 });
+    try {
+        const user = new User({ email });
+        user.setPassword(password);
+        await user.save();
+        res.redirect('/login');
+    } catch (error) {
+     next(error);   
+    }
 });
 
 // Login:POST (login)

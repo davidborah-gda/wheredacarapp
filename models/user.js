@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema; //is the schema class
+const crypto = require('crypto');
+
 const userSchema = new Schema({
     email: {
         type: String,
@@ -10,13 +12,21 @@ const userSchema = new Schema({
       },
     salt: {
       type: String,
-      // require: true  //TODO: remove - commented out for testing initially
+      require: true  
     },
     hash: {
       type: String,
-     // required: true  //TODO: remove - commented out for testing initially
+     required: true
     }
   });
+
+userSchema.methods.setPassword = function setPassword(password){
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512')
+                      .toString('hex');
+  this.salt = salt;
+  this.hash = hash;
+}
 
 const User = mongoose.model('User', userSchema);
 
