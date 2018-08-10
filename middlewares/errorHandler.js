@@ -1,12 +1,5 @@
 module.exports = function errorHandler(err, req, res, next){
-    if(err.name === "ValidationError") {
-    res.status(500).json({
-        msg: 'err.message',
-        err
+    res.status(err.status || 500).json({
+        msg: err.msg || 'Internal Server Error Please Try Again later.'
     });
-    } else {
-        res.status(500).json({
-            msg: "Please check your request and try again"
-        })
-    }
 };

@@ -6,17 +6,9 @@ const User = require('../models/user');
 
 // SignUp:POST (create new user)
 router.post('/signup', async (req, res, next) => {
-    const { email, hash, salt } = req.body;
-    try {
-        const user = new User({ email, hash, salt });
-        await user.save();
-        res.status(201).json({
-            msg: "Saved New User",
-            user
-        }); 
-    } catch (error) {
-        next(err);
-    }
+    const { email, password } = req.body;
+    if(!email || !password) 
+    next({ msg: "You have not submitted an email and a password", status: 400 });
 });
 
 // Login:POST (login)
