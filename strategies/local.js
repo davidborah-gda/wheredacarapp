@@ -7,21 +7,19 @@ const configuration = {
 
 
 
-const handler = async function localHandler(email, password, done){
-    try {
-        const user = await User.find({ email: username });
+const handler = function localHandler(email, password, done){
+        User.findOne({ email: email })
+        .then(user => {
         if(!user) {
-            done(null, false);
+            return done(null, false);
         }
-        //things needs to change
-        if(user.password !== password){
-            done(null, false);
+        if(!user.isValidPassword(password)){
+            return done(null, false);
         }
-        //this is probably change too
-        done(null, user);
-    } catch (error) {
-        done(error);
-    }
+        const token = user.generateJWT();
+        return done(null, user, { token });
+    })
+    .catch(done);
 };
 
 const strategy = new LocalStrategy(configuration, handler);

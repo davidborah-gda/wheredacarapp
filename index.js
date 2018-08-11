@@ -17,7 +17,7 @@ dotenv.config();
 passport.use(localStrategy);
 
 //passport inititalization
-passport.initialize();
+server.use(passport.initialize());
 
 //connect to the database
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });

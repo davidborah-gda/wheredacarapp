@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();//tiny lego brick
+const passport = require('passport');
+
+
 const User = require('../models/user');
 
 // routes (login:POST logout:GET, signup:POST, delete)
@@ -20,14 +23,16 @@ router.post('/signup', async (req, res, next) => {
 });
 
 // Login:POST (login)
-router.post('/login', async (req, res, next) => { 
-    try {
-        res.status(201).json({
-            msg: "Logged In User",
-        }); 
-    } catch (error) {
-        next(err);
-    }
+router.post('/login',
+ passport.authenticate('local', { failureRedirect: '/login', session: false}),
+ async (req, res, next) => { 
+  if(req.isAuthenticated()){
+      res.status(200).json({
+          token: req.authInfo.token
+      })
+  } else {
+      next({ msg: 'unauthorized', status: 401 });
+  }
 });
 
 // Logout:GET (logout)
