@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();//tiny lego brick
-const Location = require('../models/location');
 
-// routes (location:POST location:GET, location:DELETE)
+const auth = require('../middlewares/auth');
+
+
+router.use(auth);  //protet all of these routes
+//import Location model
+const Location = require('../models/location');
+//set up location routes
 
 // Location:POST (create new location)
 router.post('/locations', async (req, res, next) => {
