@@ -48,7 +48,11 @@ router.get('/logout', async (req, res, next) => {
 });
 
 //Deleted User: DELETE by email
+//TODO: You need to implement this.
 router.delete('/users/:email', auth, async (req, res, next) => {
+    //you should check that req.eamil is the same as req.params.email
+    //if they are then delete.
+    //If not then error.
     res.send(`Deleting user with the email ${req.params.email}`)
 });
 
