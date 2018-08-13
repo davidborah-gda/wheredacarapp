@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();//tiny lego brick
 const passport = require('passport');
+const auth = require('../middlewares/auth');
 
 
 const User = require('../models/user');
@@ -45,34 +46,6 @@ router.get('/logout', async (req, res, next) => {
         next(err);
     }
 });
-
-const jwt = require('jsonwebtoken');
-function auth(req, res, next) {
-const tokenWithBearer = req.headers.authorization;
-//is there a token
-if(!tokenWithBearer) {
-    next({msg: 'Unauthorized', status: 401 });
-}
-const isValid = tokenWithBearer.includes('Bearer');
-//is the token formatted appropriately
-if(!isValid) {
-    next({msg: 'Unauthorized', status: 401 });
-}
-//this removes the 'Bearer ' part leaving just the token
-const token = tokenWithBearer.slice(7);
-try {
-    console.log(token);
-    const payload = jwt.verify(token, process.env.SECRET);
-    console.log(payload);
-    req.email = payload.eamil;
-    req.id = payload.id;
-    next();
-}
-catch(err){
-    next({msg: 'Unauthorized', status: 401 });
- }
-
-}
 
 //Deleted User: DELETE by email
 router.delete('/users/:email', auth, async (req, res, next) => {
