@@ -31,7 +31,7 @@ router.post('/login',
           token: req.authInfo.token
       })
   } else {
-      next({ msg: 'unauthorized', status: 401 });
+      next({ msg: 'Either youre username or your password is incorrect', status: 400 });
   }
 });
 
