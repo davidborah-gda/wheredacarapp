@@ -46,17 +46,37 @@ router.get('/logout', async (req, res, next) => {
     }
 });
 
-//Deleted User: DELETE by id
-router.delete('/users/:id', async (req, res, next) => {
-    const { id } = req.params;
-    try {
-        await User.findByIdAndRemove(id);
-        res.status(200).json({
-            msg: "yayyy destruction user deleted"
-        });
-    }   catch (err) {
-        next(err);
-    }
+const jwt = require('jsonwebtoken');
+function auth(req, res, next) {
+const tokenWithBearer = req.headers.authorization;
+//is there a token
+if(!tokenWithBearer) {
+    next({msg: 'Unauthorized', status: 401 });
+}
+const isValid = tokenWithBearer.includes('Bearer');
+//is the token formatted appropriately
+if(!isValid) {
+    next({msg: 'Unauthorized', status: 401 });
+}
+//this removes the 'Bearer ' part leaving just the token
+const token = tokenWithBearer.slice(7);
+try {
+    console.log(token);
+    const payload = jwt.verify(token, process.env.SECRET);
+    console.log(payload);
+    req.email = payload.eamil;
+    req.id = payload.id;
+    next();
+}
+catch(err){
+    next({msg: 'Unauthorized', status: 401 });
+ }
+
+}
+
+//Deleted User: DELETE by email
+router.delete('/users/:email', auth, async (req, res, next) => {
+    res.send(`Deleting user with the email ${req.params.email}`)
 });
 
 module.exports = router;
