@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
 import Find from './pages/Find';
 import Park from './pages/Park';
@@ -16,11 +17,11 @@ class App extends Component {
       <div className="App">
         <Logo />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <PrivateRoute exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/park" component={Park} />
-          <Route path="/find" component={Find} />
+          <PrivateRoute path="/park" component={Park} />
+          <PrivateRoute path="/find" component={Find} />
           <Redirect to="/" />
         </Switch>
       </div>
