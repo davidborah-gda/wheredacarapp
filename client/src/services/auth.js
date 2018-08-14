@@ -1,13 +1,24 @@
-const fakeAuth = {
-    isAuthenticated: true,
-    authenticate(cb) {
-      this.isAuthenticated = true;
-      setTimeout(cb, 100); // fake async
-    },
-    signout(cb) {
-      this.isAuthenticated = false;
-      setTimeout(cb, 100);
-    }
-  };
+import Signup from "../pages/Signup";
 
-  export default fakeAuth;
+const fakeAuth = {
+  isAuthenticated() {
+    return true;
+  },
+  login(email, passwordf) {
+    console.log("logging in");
+  },
+  signout() {
+    console.log("signing out");
+  },
+  signup(email, password) {
+    console.log("Signing up");
+  },
+  getUserInfo() {
+    console.log("user information");
+  },
+  getToken() {
+    console.log("token things");
+  }
+};
+
+export default fakeAuth;
