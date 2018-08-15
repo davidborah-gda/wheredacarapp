@@ -25,12 +25,10 @@ router.post('/locations', async (req, res, next) => {
 });
 
 // Locaiton:GET (by ID)
-router.get('/locations/:id', async (req, res, next) => {
-    
+router.get('/locations/', async (req, res, next) => {
     try {
         res.status(201).json({
-            msg: "Here be that location",
-        
+            msg: "Here be that location"
         }); 
     } catch (error) {
         next(error);
@@ -38,10 +36,9 @@ router.get('/locations/:id', async (req, res, next) => {
 });
 
 //Delete Location: DELETE (by ID)
-router.delete('/locations/:id', async (req, res, next) => {
+router.delete('/locations/', async (req, res, next) => {
     
     try {
-       
         res.status(200).json({
             msg: "yayyy destruction location deleted"
         });
