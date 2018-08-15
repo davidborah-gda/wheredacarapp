@@ -25,7 +25,7 @@ router.post('/signup', async (req, res, next) => {
 
 // Login:POST (login)
 router.post('/login',
- passport.authenticate('local', { failureRedirect: '/login', session: false}),
+ passport.authenticate('local', { session: false}),
  async (req, res, next) => { 
   if(req.isAuthenticated()){
       res.status(200).json({
@@ -36,21 +36,10 @@ router.post('/login',
   }
 });
 
-// Logout:GET (logout)
-router.get('/logout', async (req, res, next) => {
-    try {
-        res.status(201).json({
-            msg: "Logged Out User",
-        }); 
-    } catch (error) {
-        next(err);
-    }
-});
-
 //Deleted User: DELETE by email
 //TODO: You need to implement this.
 router.delete('/users/:email', auth, async (req, res, next) => {
-    //you should check that req.eamil is the same as req.params.email
+    //you should check that req.email is the same as req.params.email
     //if they are then delete.
     //If not then error.
     res.send(`Deleting user with the email ${req.params.email}`)
