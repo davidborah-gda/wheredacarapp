@@ -11,37 +11,40 @@ const Location = require('../models/location');
 
 // Location:POST (create new location)
 router.post('/locations', async (req, res, next) => {
-    const { lat, lon, user } = req.body;
+    const { lat, lon } = req.body;
+    if(!lat || !lon) {
+        next({ msg: 'Need to supply lat and lon', status: 400 });
+    }
     try {
-        const location = new Location({ lat, lon, user });
+        const location = new Location({lat, lon, user: req.id });
         await location.save();
         res.status(201).json({
-            msg: "Saved New Location",
-            location
-        }); 
+            msg: "created a new location"
+        });
     } catch (error) {
         next(error);
     }
 });
 
 // Locaiton:GET (by ID)
-router.get('/locations/', async (req, res, next) => {
+router.get('/locations', async (req, res, next) => {
     try {
-        res.status(201).json({
-            msg: "Here be that location"
-        }); 
+        const location = await Location.findOne({ user: req.id });
+        res.status(200).json({
+            location
+        })
     } catch (error) {
         next(error);
     }
 });
 
 //Delete Location: DELETE (by ID)
-router.delete('/locations/', async (req, res, next) => {
-    
+router.delete('/locations', async (req, res, next) => {
     try {
-        res.status(200).json({
-            msg: "yayyy destruction location deleted"
-        });
+       await Location.findOneAndRemove({ user: req.id });
+       res.status(200).json({
+           msg: 'successfully deleted'
+       });
     }   catch (error) {
         next(error);
     }
